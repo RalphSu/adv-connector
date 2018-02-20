@@ -82,8 +82,9 @@ public class Application {
                 regex("/storage.*"), regex("/setup.*"), regex("/app.*"));
     }
 
+    @SuppressWarnings("deprecation")
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Rest API for HMC")
-                .contact("DL-eBay-Hadoop-HMC-Devs").version("1.0.0").build();
+        return new ApiInfoBuilder().title("Rest API for Recrod").contact("dl-support-tmob").version("1.0.0").build();
     }
+
 }
