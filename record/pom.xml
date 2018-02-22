@@ -10,9 +10,23 @@
 		<spring.boot.version>1.3.3.RELEASE</spring.boot.version>
 		<java.version>1.8</java.version>
 		<common.io.version>2.5</common.io.version>
+		<jasper.version>8.0.32</jasper.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>${jasper.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -110,8 +124,8 @@
 					<serverId>ebay</serverId>
 					<registryUrl>http://ecr.vip.ebayc3.com/organization/tmob</registryUrl>
 					<imageName>ecr.vip.ebayc3.com/tmob/record</imageName>
-                    <baseImage>fbrx/tomcat:8</baseImage>
-                    <dockerDirectory></dockerDirectory>
+					<baseImage>fbrx/tomcat:8</baseImage>
+					<dockerDirectory></dockerDirectory>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
 					</imageTags>
