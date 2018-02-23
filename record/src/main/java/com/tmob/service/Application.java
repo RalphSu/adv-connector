@@ -16,9 +16,6 @@
  */
 package com.tmob.service;
 
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -27,14 +24,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import com.google.common.base.Predicate;
 
 /**
  * @since Feb 20, 2018
@@ -51,18 +43,6 @@ public class Application {
     }
 
     @Bean
-    public Docket newsApi() {
-        String env = System.getProperty("spring.profiles.active");
-        if ("local".equals(env)) {
-            env = null;
-        }
-
-        return new Docket(DocumentationType.SWAGGER_2).pathMapping(env)
-                .select().apis(RequestHandlerSelectors.any()).paths(paths())
-                .build().apiInfo(apiInfo());
-    }
-
-    @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
         return factory;
@@ -73,16 +53,7 @@ public class Application {
         return new UiConfiguration(null);
     }
 
-    private Predicate<String> paths() {
-        return or(regex("/folderManagement.*"), regex("/integration.*"),
-                regex("/hadoop.*"), regex("/request.*"), regex("/queue.*"),
-                regex("/user.*"), regex("/batch.*"), regex("/webhdfs.*"),
-                regex("/quota.*"), regex("/info.*"), regex("/jobList.*"),
-                regex("/frontendTest.*"), regex("/job.*"), regex("/group.*"),
-                regex("/storage.*"), regex("/setup.*"), regex("/app.*"));
-    }
-
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({ "deprecation", "unused" })
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Rest API for Recrod").contact("dl-support-tmob").version("1.0.0").build();
     }
